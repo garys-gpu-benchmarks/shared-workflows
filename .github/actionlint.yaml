@@ -1,0 +1,9 @@
+# Custom labels carried by the self-hosted GPU runners, so actionlint accepts
+# runs-on: [self-hosted, gpu, <vendor>, <os_label>] in gpu-smoke.yml.
+self-hosted-runner:
+  labels:
+    - gpu
+    - amd
+    - nvidia
+    - ubu2404
+    - ubu2604

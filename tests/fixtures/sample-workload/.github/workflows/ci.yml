@@ -1,0 +1,26 @@
+# Thin caller generated from the CI contract (config/ci_contract.yaml in the
+# generator). The checks themselves live in the shared reusable workflow:
+# https://github.com/garys-gpu-benchmarks/shared-workflows
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+# Ceiling for the token the shared workflow receives.
+permissions:
+  contents: read
+
+# A newer push to the same branch cancels the run it replaces.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    uses: garys-gpu-benchmarks/shared-workflows/.github/workflows/ci.yml@v1
+    with:
+      vendor: amd
+      os_label: ubu2404
